@@ -6,10 +6,7 @@ import {toast} from 'react-toastify';
 const Links = () => {
 
     const [links, setLinks] = useState([]);
-    const [currentId, setCurrentId] = useState('');
-
-
-    
+    const [currentId, setCurrentId] = useState('');    
 
     const addOrEdit = async(usuObject) => {
         try {
