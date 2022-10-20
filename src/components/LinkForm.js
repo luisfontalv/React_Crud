@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { db } from "../firebase";
+import {toast} from 'react-toastify'
 
 
 
@@ -21,10 +22,23 @@ const LinkForm = (prosp) => {
         setValues({...values, [name]: value})
     }
 
+    const validarCampos = str => {
+        if (str === '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     const handleSubmit = e => {
         e.preventDefault();
-         
+        if (validarCampos(values.nombre) || validarCampos(values.apellido)) {
+            return toast('Campo Vacio',{
+                type:'warning',
+                autoClose: 1000
+            })
+        }
         prosp.addOrEdit(values);
         setValues({...initialStateValues})
     }
