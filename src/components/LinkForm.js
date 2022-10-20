@@ -29,11 +29,12 @@ const LinkForm = (prosp) => {
             return false;
         }
     }
-
-
     const handleSubmit = e => {
         e.preventDefault();
-        if (validarCampos(values.nombre) || validarCampos(values.apellido)) {
+        if (validarCampos(values.nombre) || validarCampos(values.apellido)|| 
+         validarCampos(values.direccion) || validarCampos(values.edad)
+         || validarCampos(values.estado)|| validarCampos(values.descripcion)
+         || validarCampos(values.ciudad)) {
             return toast('Campo Vacio',{
                 type:'warning',
                 autoClose: 1000
@@ -47,8 +48,6 @@ const LinkForm = (prosp) => {
        const doc =  await db.collection('usu').doc(id).get();
        setValues({...doc.data()})
     }
-
-
 
     useEffect(() => {
         if (prosp.currentId === '') {
