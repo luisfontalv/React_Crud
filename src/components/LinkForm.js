@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { db } from "../firebase";
+
 
 
 const LinkForm = (prosp) => {
@@ -22,9 +24,25 @@ const LinkForm = (prosp) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+         
         prosp.addOrEdit(values);
         setValues({...initialStateValues})
     }
+
+    const getLinkById =  async (id) => {
+       const doc =  await db.collection('usu').doc(id).get();
+       setValues({...doc.data()})
+    }
+
+
+
+    useEffect(() => {
+        if (prosp.currentId === '') {
+            setValues({...initialStateValues})
+        }else{
+           getLinkById(prosp.currentId)
+        }
+    }, [prosp.currentId]);
 
 
     return(
@@ -76,7 +94,7 @@ const LinkForm = (prosp) => {
             </div>
             <br />
             <button className="btn btn-primary btn-block">
-                Guardar
+                {prosp.currentId === '' ? 'Guardar': 'Actualizar'}
             </button>
         </form>
     )

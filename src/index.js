@@ -7,6 +7,7 @@ import './firebase';
 
 import 'bootswatch/dist/superhero/bootstrap.min.css'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
